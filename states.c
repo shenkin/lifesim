@@ -56,6 +56,15 @@ static void propagate_state_seq( Uint inode ) {
 static void propagate_state_rand() {
 }
 
+char *get_state_str( Uint st[] ) {
+    static char str[ nnodes + 1 ];
+    str[ nnodes ] = '\0';
+    for( Uint inode=0; inode<nnodes; ++ inode ) {
+        str[ inode ] = '0' + st[ inode ];
+    }
+    return str;
+}
+
 bool set_sync_behavior( char b ) {
     switch ( b ) {
         case 'g':
@@ -88,6 +97,7 @@ void set_random_state() {
         Uint istate = random() % nnode_states;
         update_node( i, istate );
     }
+    set_display( state );
 }
 
 bool set_full_state( Uint new_state[nnodes] ) {

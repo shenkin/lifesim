@@ -7,7 +7,6 @@
 int main( int nargs, char *args[] ) {
     printf( "before:\n%s", get_display() );
     init_display();
-    printf( "between:\n%s", get_display() );
-    set_constant_state( 0 );
+    set_random_state( );
     printf( "after:\n%s", get_display() );
 }

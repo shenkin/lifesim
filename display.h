@@ -5,7 +5,7 @@
 #include "nodes.h"
 
 EXTERN Uint display_position[ nnodes ];
-EXTERN char display_states[] INIT( "rgb" );
+EXTERN char display_states[] INIT( "RGB" );
 
 void init_display();
 

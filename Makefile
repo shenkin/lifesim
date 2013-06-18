@@ -5,12 +5,12 @@ all: lifesim
 lifesim: $(OBJ)
 	$(CC) -o lifesim $(OBJ)
 
-states.o: common.h nodes.h states.h display.h
-display.o: common.h display.h
-lifesim.o: nodes.h states.h display.h
+states.o: defref.h common.h nodes.h states.h display.h
+display.o: defref.h common.h display.h
+lifesim.o: defref.h nodes.h states.h display.h
 
 clean:
-	rm *.o
+	@rm *.o
 clean_all:
-	make clean
-	rm lifesim
+	@make clean
+	@rm lifesim

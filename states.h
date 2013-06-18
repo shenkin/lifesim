@@ -15,4 +15,7 @@ bool set_full_state( Uint new_state[nnodes] ) ;
 void propagate_state( Uint inode ) ;
 
 bool set_node( Uint inode, Uint istate ) ;
+
+char *get_state_str( Uint state[] ) ;
+
 # endif // _STATES_H_
