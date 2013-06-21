@@ -1,5 +1,5 @@
 CFLAGS = -std=gnu99
-OBJ =  states.o display.o lifesim.o
+OBJ =  states.o display.o lifesim.o nodes.o
 
 all: lifesim
 lifesim: $(OBJ)
@@ -10,7 +10,7 @@ display.o: defref.h common.h display.h
 lifesim.o: defref.h nodes.h states.h display.h
 
 clean:
-	@rm *.o
+	-@rm *.o
 clean_all:
-	@make clean
-	@rm lifesim
+	-@make clean
+	-@rm lifesim

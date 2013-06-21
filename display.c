@@ -2,9 +2,12 @@
 #include "common.h"
 #include "display.h"
 #include "states.h"
+#include "nodes.h"
 
-// B stands for Backslash; it will be replaced programmatically:
-char display[] =
+// Display prototype.
+// B stands for Backslash; it will be replaced programmatically
+//  with the backslash character:
+char display_pro[] =
  "   - x  0          - x  1          - x  2         \n"
  "  /     B         /     B         /     B         \n"
  " x 3     x 4     x 5     x 6     x 7     x 8      \n"
@@ -30,24 +33,45 @@ char display[] =
  " x 48    x 49    x 50    x 51    x 52    x 53     \n"
  "  B     /         B     /         B     /         \n\0";
 
+char *display; 
+
 
 void init_display() {
+    // copy display_pro to display:
+    Uint l = strlen( display_pro );
+    display = malloc( l + 1 );
+    memcpy( display, display_pro, l+1 );
+}
+
+void init_display_pro() {
+    // Initialize the display prototype string (replace
+    //  B with backslash character) and copy it to the display:
+    for( char *p=display_pro; *p!='\0'; ++p ) {
+        Uint offset = p - display_pro;
+        if( *p == 'B' ) {
+            *p = '\\';
+        }
+    }
+}
+
+void init_display_position() {
+    // Initialize the array of positions in the display
+    //  associated with the nodes:
     Uint inode = 0;
     for( char *p=display; *p!='\0'; ++p ) {
         Uint offset = p - display;
         if( *p == 'x' ) {
             display_position[ inode ] = offset;
             inode += 1;
-        } else if( *p == 'B' ) {
-            *p = '\\';
         }
     }
 }
 
 void set_display( Uint state[nnodes] ){
+    // Set the display to a state:
     for( Uint inode=0; inode<nnodes; ++inode ) {
         Uint istate = state[ inode ];
-        char c = display_states[ istate ];
+        char c = display_chars[ istate ];
         Uint ipos = display_position[ inode ];
         display[ ipos ] = c;
     }
@@ -57,3 +81,21 @@ char *get_display() {
     return display;
 }
 
+
+void show_node_neighbors( Uint inode ) {
+    // "Light up" node inode with state 0 and its neighbors 
+    //  with state 1; this just performs a visible test of
+    //  the neihbor arrays: 
+    char cinode = display_chars[ 0 ]; // character for inode
+    char cnnode = display_chars[ 1 ]; // character for neighbor
+    init_display();
+    Uint inode_pos = display_position[ inode ];
+    display[ inode_pos ] = cinode;
+    for( Uint jneigh=0; jneigh<nneighbors; jneigh+=1 ) {
+        Uint nnode = nodes[ inode ].neighbors[ jneigh ];
+        if( nnode < nnodes ){
+            Uint nnode_pos = display_position[ nnode ];
+            display[ nnode_pos ] = cnnode;
+        }
+    }
+}

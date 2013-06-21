@@ -5,11 +5,14 @@
 #define nnodes 54
 #define nneighbors 4
 
-typedef struct {
+typedef struct node_struct {
     Uint state;
     Uint neighbors[ nneighbors ];
 } Node;
 
-EXTERN Node nodes[ nnodes ];
+typedef Node Nodes[ nnodes ];
+EXTERN Nodes nodes;
+
+void initialize_node_neighbors();
 
 # endif // _NODES_H_
