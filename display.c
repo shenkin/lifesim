@@ -1,4 +1,3 @@
-#include <strings.h>
 #include "common.h"
 #include "display.h"
 #include "states.h"
@@ -35,12 +34,11 @@ char display_pro[] =
 
 char *display; 
 
-
 void init_display() {
     // copy display_pro to display:
-    Uint l = strlen( display_pro );
-    display = malloc( l + 1 );
-    memcpy( display, display_pro, l+1 );
+    Uint len = strlen( display_pro );
+    display = malloc( len + 1 );
+    memcpy( display, display_pro, len+1 );
 }
 
 void init_display_pro() {
@@ -52,6 +50,10 @@ void init_display_pro() {
             *p = '\\';
         }
     }
+}
+
+Uint len_display( void ) {
+    return strlen( display );
 }
 
 void init_display_position() {

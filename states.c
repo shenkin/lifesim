@@ -39,8 +39,12 @@ static void propagate_state_gang() {
         Uint *neighbors = nodes[ i ].neighbors;
         Uint istate = state[ i ];
         Uint state_plus_one = ( istate + 1 ) % nnode_states;
+        new_state[ i ] = istate;
         for( Uint j=0; j<nneighbors; j+= 1 ) {
             Uint neighbor = neighbors[ j ];
+            if( neighbor == nnodes ) {
+                break;
+            }
             if( state[neighbor] = state_plus_one ) {
                 new_state[ i ] = state_plus_one;
                 break;
@@ -56,11 +60,11 @@ static void propagate_state_seq( Uint inode ) {
 static void propagate_state_rand() {
 }
 
-char *get_state_str( Uint st[] ) {
+char *get_state_str( ) {
     static char str[ nnodes + 1 ];
     str[ nnodes ] = '\0';
-    for( Uint inode=0; inode<nnodes; ++ inode ) {
-        str[ inode ] = '0' + st[ inode ];
+    for( Uint inode=0; inode<nnodes; ++inode ) {
+        str[ inode ] = '0' + state[ inode ];
     }
     return str;
 }
@@ -112,6 +116,7 @@ bool set_full_state( Uint new_state[nnodes] ) {
 }
 
 void propagate_state( Uint inode ) {
+    
     switch ( behavior ) {
         case 'g':
             propagate_state_gang();
@@ -133,4 +138,11 @@ bool set_node( Uint inode, Uint istate ) {
         return false;
     }
     update_node( inode, istate );
+}
+
+void set_display_to_state( ){
+    // Set the display to the current state
+    //printf( "before setting display: %s\n", get_state_str() );
+    set_display( state );
+    //printf( "after setting display: %s\n", get_state_str() );
 }

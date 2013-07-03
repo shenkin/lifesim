@@ -16,6 +16,8 @@ void propagate_state( Uint inode ) ;
 
 bool set_node( Uint inode, Uint istate ) ;
 
-char *get_state_str( Uint state[] ) ;
+char *get_state_str( );
+
+void set_display_to_state( );
 
 # endif // _STATES_H_

@@ -21,4 +21,6 @@ char *get_display();
 
 void show_node_neighbors( Uint inode ) ;
 
+Uint len_display( void );
+
 #endif // _DISPLAY_H_
