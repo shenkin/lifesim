@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <strings.h>
+#include <time.h>
 #include "defref.h"
 
 typedef unsigned int Uint;

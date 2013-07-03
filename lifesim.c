@@ -8,32 +8,37 @@ int main( int nargs, char *args[] ) {
     init_display_pro();
     init_display();
     init_display_position();
-    printf( "before:\n%s", get_display() );
     initialize_node_neighbors();
-/*
-    for( Uint inode=0; inode<nnodes; inode+=1 ) {
-        show_node_neighbors( inode );        
-        printf( "node neighbors of node %d:\n%s", 
-         inode, get_display() );
-    }
-*/
+
+    time_t *tloc;
+    srandom( time(tloc) );
     set_random_state( );
-    printf( "after:\n%s", get_display() );
-    printf( "after state str: %s\n", get_state_str( ) );
     char last_state_str[ nnodes + 1 ];
-    strcpy( last_state_str, get_state_str );
-    for( Uint i=0; i<100; ++i ) {
+    strcpy( last_state_str, get_state_str() );
+    printf( "initial state:\n%s", get_display() );
+    Uint i=0;
+    Uint converged = 0;
+    for( ; i<100; ++i ) {
+        printf( "i, state str= %4d, %s\n", i, get_state_str() );
         propagate_state( 0 );
-        char * state_str = get_state_str();
+        char *state_str = get_state_str();
         if( !strcmp(state_str,last_state_str) ) {
-            printf( "converged at state %d\n", i );
+            converged = 1;
             break;
         }
         strcpy( last_state_str, state_str );
-        //set_display_to_state();
-        printf( "i, state str= %4d, %s\n", i, get_state_str( ) );
     }
-    printf( "at end state str= %s\n", get_state_str( ) );
-    printf( "at end:\n%s", get_display() );
+    printf( "i, state str= %4d, %s\n", i, get_state_str() );
+
+    char *msg;
+    if( converged ) {
+        msg = "converged at step";
+    } else {
+        msg = "did not converge by step";
+    }
+    printf( "%s %d\n", msg, i );
+
+    set_display_to_state();
+    printf( "final state:\n%s", get_display() );
     printf( "Finito la musica\n" );
 }

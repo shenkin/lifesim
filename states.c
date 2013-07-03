@@ -38,15 +38,17 @@ static void propagate_state_gang() {
     for( Uint i=0; i<nnodes; i+=1 ) {
         Uint *neighbors = nodes[ i ].neighbors;
         Uint istate = state[ i ];
-        Uint state_plus_one = ( istate + 1 ) % nnode_states;
+        Uint istate_plus_one = ( istate + 1 ) % nnode_states;
         new_state[ i ] = istate;
         for( Uint j=0; j<nneighbors; j+= 1 ) {
             Uint neighbor = neighbors[ j ];
+            Uint neighbor_state = state[ neighbor ];
             if( neighbor == nnodes ) {
+                // This node has no more neighbors
                 break;
             }
-            if( state[neighbor] = state_plus_one ) {
-                new_state[ i ] = state_plus_one;
+            if( neighbor_state == istate_plus_one ) {
+                new_state[ i ] = istate_plus_one;
                 break;
             }
         }
