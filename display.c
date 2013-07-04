@@ -1,12 +1,9 @@
 #include "common.h"
-#include "display.h"
-#include "states.h"
-#include "nodes.h"
 
 // Display prototype.
 // B stands for Backslash; it will be replaced programmatically
 //  with the backslash character:
-char display_pro[] =
+static char display_pro[] =
  "   - x  0          - x  1          - x  2         \n"
  "  /     B         /     B         /     B         \n"
  " x 3     x 4     x 5     x 6     x 7     x 8      \n"
@@ -32,7 +29,7 @@ char display_pro[] =
  " x 48    x 49    x 50    x 51    x 52    x 53     \n"
  "  B     /         B     /         B     /         \n\0";
 
-char *display; 
+static char *display; 
 
 void init_display() {
     // copy display_pro to display:

@@ -1,7 +1,6 @@
 #include "common.h"
-#include "nodes.h"
 
-Uint neighbor_initializer[][ 4 ] = {
+static Uint neighbor_initializer[][ 4 ] = {
  { 3, 4, nnodes, nnodes }, // Node 0
  { 5, 6, nnodes, nnodes }, // Node 1
  { 7, 8, nnodes, nnodes  }, // Node 2

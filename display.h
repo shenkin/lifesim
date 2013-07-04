@@ -2,7 +2,6 @@
 #define _DISPLAY_H_
     
 #include "common.h"
-#include "nodes.h"
 
 // For each node, list its index in the display string:
 EXTERN Uint display_position[ nnodes ];

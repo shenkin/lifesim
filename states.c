@@ -1,10 +1,7 @@
 #include "common.h"
-#include "nodes.h"
-#include "states.h"
-#include "display.h"
 
 char behavior = 'g';
-Uint state[ nnodes ];
+static Uint state[ nnodes ];
 
 static bool check_state( Uint istate ) {
     if( istate < nnode_states ) {

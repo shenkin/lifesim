@@ -1,8 +1,5 @@
 #define DEF
 #include "common.h"
-#include "nodes.h"
-#include "states.h"
-#include "display.h"
 
 int main( int nargs, char *args[] ) {
     init_display_pro();
