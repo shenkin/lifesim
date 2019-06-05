@@ -1,1 +1,7 @@
 Simulation of hackmanhattan.com "life"
+
+"life" is a finite-state automaton in a cylindrical topology. It introduces random fluctionations,
+and also responds to user input. The simulation does not introduce random fluctuations, but rather
+explores what happens without them The intent is to see whether a game could be based on this that
+allows users to be able to divine the effect of their actions, toward some goal; such as: winding up
+in a state where all the nodes are a specified color.
